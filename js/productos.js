@@ -15,6 +15,7 @@ createApp({
             imagen: "",
             stock: 0,
             precio: 0,
+            carrito: [],
         }
     },
     methods: {
@@ -74,8 +75,17 @@ createApp({
         regresar() {
             window.location.href = "./productos.html";
         },
+        agregarAlCarrito(id) {
+            let producto = this.productos.find(p => p.id === id);
+            if (producto) {
+                this.carrito.push(producto);
+            }
+        }
+        
     },
     created() {
         this.fetchData(this.url)
     },
 }).mount('#app')
+
+

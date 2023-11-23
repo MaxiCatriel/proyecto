@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -16,9 +17,7 @@
     <main>
         <div id="app" class="container">
             <h1>Productos</h1>
-            <br>
-            <a class="btn btn-primary" href="producto_nuevo.html">Nuevo</a>
-            <br><br>
+
             <div v-if="error">
                 <p>Lo sentimos , ........</p>
             </div>
@@ -38,7 +37,7 @@
                                     <th scope="col">Precio</th>
                                     <th scope="col">Stock</th>
                                     <th scope="col">Imagen</th>
-                                    <th scope="col">Acciones</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,12 +51,11 @@
                                     <td>
                                         <img width="60" :src="producto.imagen" :alt="producto.nombre">
                                     </td>
-                                    <td class="d-flex justify-content-center align-items-center">
-                                        <a class="btn btn-primary me-2"
-                                            :href="'producto_update.html?id='+ producto.id">Editar</a>
-                                        <button type="button" class="btn btn-danger"
-                                            v-on:click="confirmarEliminar(producto.id)">Eliminar</button>
+                                    <td>
+                                        <!-- Botón para abrir el carrito -->
+                                        <button class="btn btn-primary" @click="agregarAlCarrito(producto.id)">Comprar</button>
                                     </td>
+
                                 </tr>
                             </tbody>
                         </table>
@@ -69,10 +67,42 @@
     <footer>
         <!-- place footer here -->
     </footer>
-
-    
-
+    <!-- Formulario emergente -->
+    <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminModalLabel">Iniciar sesión como Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Usuario</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="validateAdmin()">Iniciar sesión</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li v-for="producto in carrito">
+                {{producto.nombre}} - {{producto.precio}}
+            </li>
+        </ul>
+    </div>
+   
     <!-- Link de Bootstrap -->
+
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
         crossorigin="anonymous"></script>

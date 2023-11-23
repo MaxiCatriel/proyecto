@@ -12,6 +12,9 @@ createApp({
             stock: 0,
             precio: 0,
             url: 'http://maximilianovm.pythonanywhere.com/productos/' + id,
+            producto: [],
+            carrito: [],
+
         };
     },
     methods: {
@@ -59,7 +62,8 @@ createApp({
         regresar() {
             window.location.href = "./productos.html";
         },
-},
+    },
+
         
         created() {
             this.fetchData(this.url);
