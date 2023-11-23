@@ -11,7 +11,7 @@ createApp({
             imagen: "",
             stock: 0,
             precio: 0,
-            url: 'http://maximilianovm.pythonanywhere.com/productos/' + id,
+            url: 'https://maximilianovm.pythonanywhere.com/productos/' + id,
             producto: [],
             carrito: [],
 
