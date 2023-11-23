@@ -55,7 +55,10 @@ createApp({
                     console.error(err);
                     alert("Error al Modificar")
                 })
-        }
+        },
+        regresar() {
+            window.location.href = "./productos.html";
+        },
     },
     created() {
         this.fetchData(this.url)
