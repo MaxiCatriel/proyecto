@@ -12,9 +12,7 @@ createApp({
             stock: 0,
             precio: 0,
             url: 'https://maximilianovm.pythonanywhere.com/productos/' + id,
-            producto: [],
-            carrito: [],
-
+           
         };
     },
     methods: {
@@ -62,15 +60,7 @@ createApp({
         regresar() {
             window.location.href = "./productos.html";
         },
-        agregarAlCarrito(id) {
-            let producto = this.productos.find(p => p.id === id);
-            if (producto && producto.stock > 0) {
-                this.carrito.push(producto);
-                producto.stock--;
-            }
-        },
-
-        
+                      
         created() {
             this.fetchData(this.url);
         }

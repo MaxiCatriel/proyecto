@@ -2,7 +2,6 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
-            productos: [],
             //url:'http://localhost:5000/productos', 
             // si el backend esta corriendo local  usar localhost 5000(si no lo subieron a pythonanywhere)
             url: 'https://maximilianovm.pythonanywhere.com/productos',   // si ya lo subieron a pythonanywhere
@@ -15,7 +14,7 @@ createApp({
             imagen: "",
             stock: 0,
             precio: 0,
-            carrito: [],
+            
         }
     },
     methods: {
