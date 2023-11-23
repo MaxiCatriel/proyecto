@@ -33,7 +33,7 @@ document.getElementById("header").innerHTML =  `<nav class="navbar navbar-expand
 
 </nav>`
 
-
+//Validacion Usuario Administrador
 function validateAdmin() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
@@ -47,13 +47,14 @@ function validateAdmin() {
 
     // Cierra el modal después de validar
     $('#adminModal').modal('hide');
-    }
+}
 
 // Mostrar el formulario emergente al hacer clic en el enlace "Admin"
 document.getElementById('adminLink').addEventListener('click', function () {
     $('#adminModal').modal('show');
 });
 
+//Funcion para busqueda en barra de Navegacion
 function searchPage() {
     var searchQuery = document.getElementById("searchInput").value.toLowerCase();
     var pageContent = document.body.innerHTML.toLowerCase();

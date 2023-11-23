@@ -75,12 +75,7 @@ createApp({
         regresar() {
             window.location.href = "./productos.html";
         },
-        agregarAlCarrito(id) {
-            let producto = this.productos.find(p => p.id === id);
-            if (producto) {
-                this.carrito.push(producto);
-            }
-        }
+        
         
     },
     created() {

@@ -67,7 +67,7 @@
     <footer>
         <!-- place footer here -->
     </footer>
-    <!-- Formulario emergente -->
+<!-- Formulario emergente Validacion Admin para CRUD -->
     <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -92,7 +92,29 @@
             </div>
         </div>
     </div>
-   
+<!-- Ventana emergente del carrito -->
+<div class="modal fade" id="carritoModal" tabindex="-1" role="dialog" aria-labelledby="carritoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="carritoModalLabel">Carrito de Compras</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenido del carrito de compras -->
+                <ul>
+                    <li v-for="producto in carrito">{{ producto.nombre }} - {{ producto.precio }}</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <!-- Otros botones o acciones relacionadas con el carrito -->
+            </div>
+        </div>
+    </div>
+</div>
+
    
     <!-- Link de Bootstrap -->
 
