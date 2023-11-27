@@ -18,12 +18,6 @@ class Producto(db.Model):   # la clase Producto hereda de db.Model
 
 
 
-
-    #  si hay que crear mas tablas , se hace aqui
-
-
-
-
 with app.app_context():
     db.create_all()  # aqui crea todas las tablas
 #  ************************************************************
