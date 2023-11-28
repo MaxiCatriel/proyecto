@@ -1,22 +1,26 @@
+from app import db, ma, app
 
-from app import db, ma
-from flask_bcrypt import Bcrypt
-
-bcrypt = Bcrypt()
-
+# Defino la tabla de usuarios
 class Usuario(db.Model):
-    # ... (otras columnas)
-    
-    def set_password(self, password):
-        self.contraseña_hash = bcrypt.generate_password_hash(password).decode('utf-8')
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), unique=True, nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
 
-    def check_password(self, password):
-        return bcrypt.check_password_hash(self.contraseña_hash, password)
+    def __init__(self, username, password, email):
+        self.username = username
+        self.password = password
+        self.email = email
 
-    @classmethod
-    def create(cls, nombreDeUsuario, contraseña, mail):
-        nuevo_usuario = cls(nombreDeUsuario=nombreDeUsuario, mail=mail)
-        nuevo_usuario.set_password(contraseña)
-        db.session.add(nuevo_usuario)
-        db.session.commit()
-        return nuevo_usuario
+# Crea la tabla de usuarios
+with app.app_context():
+    db.create_all()
+
+# Define el esquema para la serialización
+class UsuarioSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'username', 'password', 'email')
+
+# Crea instancias de los esquemas
+usuario_schema = UsuarioSchema()
+usuarios_schema = UsuarioSchema(many=True)
