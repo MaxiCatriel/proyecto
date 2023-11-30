@@ -1,75 +1,68 @@
-from app import *
+from app import app, db
 from flask import jsonify, request
+from modelos.productos_modelo import Producto, producto_schema, productos_schema
 
-from modelos.productos_modelo import *
+@app.route('/productos', methods=['GET', 'POST'])
+def manage_productos():
+    if request.method == 'GET':
+        try:
+            if 'id' in request.args:
+                id = request.args['id']
+                producto = Producto.query.get(id)
+                if producto:
+                    return producto_schema.jsonify(producto), 200
+                else:
+                    return jsonify({"message": "Producto no encontrado"}), 404
+            else:
+                all_productos = Producto.query.all()
+                result = productos_schema.dump(all_productos)
+                return jsonify(result), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
-# crea los endpoint o rutas (json)
-@app.route('/productos',methods=['GET'])
-def get_Productos():
-    all_productos=Producto.query.all()         # el metodo query.all() lo hereda de db.Model
-    result=productos_schema.dump(all_productos)  # el metodo dump() lo hereda de ma.schema y
-                                                 # trae todos los registros de la tabla
-    return jsonify(result)                       # retorna un JSON de todos los registros de la tabla
+    elif request.method == 'POST':
+        try:
+            data = request.get_json()
+            nombre = data['nombre']
+            descripcion = data['descripcion']
+            precio = data['precio']
+            stock = data['stock']
+            imagen = data['imagen']
+            
+            new_producto = Producto(nombre=nombre, descripcion=descripcion, precio=precio, stock=stock, imagen=imagen)
+            db.session.add(new_producto)
+            db.session.commit()
+            return producto_schema.jsonify(new_producto), 201
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
+@app.route('/productos/<id>', methods=['DELETE', 'PUT'])
+def modify_producto(id):
+    if request.method == 'DELETE':
+        try:
+            producto = Producto.query.get(id)
+            if producto:
+                db.session.delete(producto)
+                db.session.commit()
+                return producto_schema.jsonify(producto), 200
+            else:
+                return jsonify({"message": "Producto no encontrado"}), 404
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
+    elif request.method == 'PUT':
+        try:
+            producto = Producto.query.get(id)
+            if producto:
+                producto.nombre = request.json['nombre']
+                producto.descripcion = request.json['descripcion']
+                producto.precio = request.json['precio']
+                producto.stock = request.json['stock']
+                producto.imagen = request.json['imagen']
 
-
-@app.route('/productos/<id>',methods=['GET'])
-def get_producto(id):
-    producto=Producto.query.get(id)
-    return producto_schema.jsonify(producto)   # retorna el JSON de un producto recibido como parametro
-@app.route('/productos/<id>',methods=['DELETE'])
-def delete_producto(id):
-    producto=Producto.query.get(id)
-    db.session.delete(producto)
-    db.session.commit()
-    return producto_schema.jsonify(producto)   # me devuelve un json con el registro eliminado
-
-
-@app.route('/productos', methods=['POST']) # crea ruta o endpoint
-def create_producto():
-    #print(request.json)  # request.json contiene el json que envio el cliente
-    nombre=request.json['nombre']
-    descripcion=request.json['descripcion']
-    precio=request.json['precio']
-    stock=request.json['stock']
-    imagen=request.json['imagen']
-    new_producto=Producto(nombre,descripcion,precio,stock,imagen)
-    db.session.add(new_producto)
-    db.session.commit()
-    return producto_schema.jsonify(new_producto)
-
-
-@app.route('/productos/<id>' ,methods=['PUT'])
-def update_producto(id):
-    producto=Producto.query.get(id)
- 
-    producto.nombre=request.json['nombre']
-    producto.descripcion=request.json['descripcion']
-    producto.precio=request.json['precio']
-    producto.stock=request.json['stock']
-    producto.imagen=request.json['imagen']
-
-
-    db.session.commit()
-    return producto_schema.jsonify(producto)
- 
-@app.route('/productos', methods=['GET'])
-def get_productos():
-    try:
-        all_productos = Producto.query.all()
-        result = productos_schema.dump(all_productos)
-        return jsonify(result), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-@app.route('/productos/<id>', methods=['GET'])
-def get_producto(id):
-    try:
-        producto = Producto.query.get(id)
-        if producto:
-            return producto_schema.jsonify(producto), 200
-        else:
-            return jsonify({"message": "Producto no encontrado"}), 404
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+                db.session.commit()
+                return producto_schema.jsonify(producto), 200
+            else:
+                return jsonify({"message": "Producto no encontrado"}), 404
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500

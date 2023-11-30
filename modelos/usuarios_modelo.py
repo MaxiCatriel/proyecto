@@ -12,15 +12,13 @@ class Usuario(db.Model):
         self.password = password
         self.email = email
 
-# Crea la tabla de usuarios
-with app.app_context():
-    db.create_all()
 
-# Define el esquema para la serialización
+# Definir el esquema para la serialización
 class UsuarioSchema(ma.Schema):
     class Meta:
         fields = ('id', 'username', 'password', 'email')
 
-# Crea instancias de los esquemas
+# Crear instancias de los esquemas
 usuario_schema = UsuarioSchema()
 usuarios_schema = UsuarioSchema(many=True)
+
