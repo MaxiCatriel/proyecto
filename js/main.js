@@ -9,9 +9,8 @@ document.getElementById("header").innerHTML =  `<nav class="navbar navbar-expand
       <ul class="navbar-nav me-auto mt-2 mt-lg-0">
           
           <li class="nav-item">
-            <a class="nav-link" href="#" id="registroLink">Registrarse</a>
-        </li>
-
+              <a class="nav-link" href="#">Link</a>
+          </li>
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CRUD</a>
               <div class="dropdown-menu" aria-labelledby="dropdownId">
@@ -54,48 +53,6 @@ function validateAdmin() {
 document.getElementById('adminLink').addEventListener('click', function () {
     $('#adminModal').modal('show');
 });
-
-// Mostrar el formulario emergente al hacer clic en el enlace "Registrarse"
-document.getElementById('registroLink').addEventListener('click', function () {
-    $('#registroModal').modal('show');
-});
-
-
-function registrarUsuario() {
-    var nuevoUsername = document.getElementById("registroUsername").value;
-    var nuevaPassword = document.getElementById("registroPassword").value;
-    var nuevoEmail = document.getElementById("registroEmail").value;
-
-    // Realizo la solicitud de registro al backend
-    fetch('/registro', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            nombreDeUsuario: nuevoUsername,
-            contraseña: nuevaPassword,
-            mail: nuevoEmail
-        }),
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message) {
-                alert(data.message);
-                // Puedes redirigir a otra página o realizar otra acción después del registro
-                // window.location.href = "login.html";
-                // Cierra el modal después de registrar
-                $('#registroModal').modal('hide');
-            } else {
-                alert("Error al registrar el usuario. Por favor, inténtelo de nuevo.");
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert("Error al registrar el usuario. Por favor, inténtelo de nuevo.");
-        });
-}
-
 
 //Funcion para busqueda en barra de Navegacion
 function searchPage() {
