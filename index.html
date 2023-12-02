@@ -64,10 +64,67 @@
             </div>
         </div>
     </main>
+
+    <!-- Formulario de Registro -->
+    <div id="registroForm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="registroFormLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registroFormLabel">Registro de Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registroUsuarioForm">
+                        <div class="mb-3">
+                            <label for="registroEmail" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="registroEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registroPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="registroPassword" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="registrarUsuario()">Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario de Inicio de Sesión -->
+    <div id="loginForm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loginFormLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginFormLabel">Inicio de Sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginUsuarioForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="iniciarSesion()">Iniciar Sesión</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
     <footer>
         <!-- place footer here -->
     </footer>
-<!-- Formulario emergente Validacion Admin para CRUD -->
+    <!-- Formulario emergente Validacion Admin para CRUD -->
     <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -94,7 +151,7 @@
     </div>
 
 
-   
+
     <!-- Link de Bootstrap -->
 
 
