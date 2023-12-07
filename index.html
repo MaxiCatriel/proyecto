@@ -27,26 +27,27 @@
                     <p>Cargando .....</p>
                 </section>
                 <section>
-    <div class="row">
-        <div class="col-md-4 mb-4" v-for="(producto, index) in productos" :key="producto.id">
-            <div class="card">
-                <img :src="producto.imagen" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ producto.nombre }}</h5>
-                    <p class="card-text">{{ producto.descripcion }}</p>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">ID: {{ producto.id }}</li>
-                        <li class="list-group-item">Precio: {{ producto.precio }}</li>
-                        <li class="list-group-item">Stock: {{ producto.stock }}</li>
-                    </ul>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary" @click="mostrarCarrito">Comprar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+                    <div class="row">
+                        <div class="col-md-4 mb-4" v-for="(producto, index) in productos" :key="producto.id">
+                            <div class="card h-100">
+                                <img :src="producto.imagen" class="card-img-top" alt="...">
+                <                    <div class="card-body">
+                                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                                        <p class="card-text">{{ producto.descripcion }}</p>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">ID: {{ producto.id }}</li>
+                                            <li class="list-group-item">Precio: {{ producto.precio }}</li>
+                                            <li class="list-group-item">Stock: {{ producto.stock }}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button class="btn btn-primary" @click="mostrarCarrito">Comprar</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
 
             </div>
         </div>
