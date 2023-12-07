@@ -26,41 +26,28 @@
                     <div class="spinner-border"></div>
                     <p>Cargando .....</p>
                 </section>
-                <section v-else>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Descripcion</th>
-                                    <th scope="col">Precio</th>
-                                    <th scope="col">Stock</th>
-                                    <th scope="col">Imagen</th>
+                <section>
+    <div class="row">
+        <div class="col-md-4 mb-4" v-for="(producto, index) in productos" :key="producto.id">
+            <div class="card">
+                <img :src="producto.imagen" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                    <p class="card-text">{{ producto.descripcion }}</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">ID: {{ producto.id }}</li>
+                        <li class="list-group-item">Precio: {{ producto.precio }}</li>
+                        <li class="list-group-item">Stock: {{ producto.stock }}</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" @click="mostrarCarrito">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(producto, index) in productos"
-                                    :class="{ 'bg-light': index % 2 === 0, 'bg-opacity-10': index % 2 !== 0 }">
-                                    <td scope="row">{{producto.id}}</td>
-                                    <td>{{producto.nombre}}</td>
-                                    <td>{{producto.descripcion}}</td>
-                                    <td>{{producto.precio}}</td>
-                                    <td>{{producto.stock}}</td>
-                                    <td>
-                                        <img width="60" :src="producto.imagen" :alt="producto.nombre">
-                                    </td>
-                                    <td>
-                                        <!-- Botón para abrir el carrito -->
-                                        <button class="btn btn-primary" @click="mostrarCarrito">Comprar</button>
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
             </div>
         </div>
     </main>
